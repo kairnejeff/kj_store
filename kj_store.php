@@ -43,7 +43,7 @@ class kj_store extends Module
                 PRIMARY KEY (`id_group_store`)
             ) 
         ';
-        return Db::getInstance()->execute($sqlAddColume)&&Db::getInstance()->execute($sqlAddtable);
+        return Db::getInstance()->execute($sqlAddtable)&&Db::getInstance()->execute($sqlAddColume);
     }
 
     protected function uninstallSql()
