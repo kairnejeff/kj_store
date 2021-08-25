@@ -35,21 +35,24 @@ class kj_store extends Module
     }
 
     public function installSql(){
-        return Db::getInstance()->execute('
+        $sqlAddColume= ' ALTER TABLE `'._DB_PREFIX_.'group_store` ADD id_group int(11) NULL';
+        $sqlAddtable='
             CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'group_store` (
                 `id_group_store` int(10) unsigned NOT NULL AUTO_INCREMENT,
                 `name`  VARCHAR(255)  NOT NULL,
                 PRIMARY KEY (`id_group_store`)
             ) 
-        ');
+        ';
+        return Db::getInstance()->execute($sqlAddColume)&&Db::getInstance()->execute($sqlAddtable);
     }
 
     protected function uninstallSql()
     {
-        return Db::getInstance()->execute('
-            DROP TABLE IF EXISTS `'._DB_PREFIX_.'group_store`;
-        ');
+        $sqlDropColumn='ALTER TABLE `'._DB_PREFIX_.'group_store` DROP id_group';
+        $sqlDropTable='DROP TABLE IF EXISTS `'._DB_PREFIX_.'group_store`';
+        return Db::getInstance()->execute($sqlDropColumn)&& Db::getInstance()->execute($sqlDropTable);
     }
+
     public function getContent(){
         if (Tools::isSubmit('submitGroup') || Tools::isSubmit('delete_id_group')
         ) {
@@ -68,7 +71,7 @@ class kj_store extends Module
                     return $this->_html;
                 }
                 $group = new kj_store_object();
-                $group->name=$name;
+                $group->name=str_replace("'","\'",$name);
                 $group->save();
             }else{
                $id=Tools::getValue('delete_id_group');
