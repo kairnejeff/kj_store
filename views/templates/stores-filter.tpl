@@ -10,7 +10,7 @@
                 <p class="text-justify">{$store.note}<p>
                 {/if}
                 {if $store.phone}
-                    <p> class="material-icons">&#xE0B0;{$store.phone}</p>
+                    <p><i class="material-icons">&#xE0B0;{$store.phone}</p>
                 {/if}
                 {if $store.fax}
                   <p><i class="material-icons">&#xE8AD;</i>{$store.fax}</p>
