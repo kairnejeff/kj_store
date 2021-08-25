@@ -12,4 +12,23 @@ class Store extends StoreCore
         ];
         parent::__construct($idStore, $idLang);
     }
+
+    public static function getStores($idLang)
+    {
+        $stores = Db::getInstance()->executeS(
+            '
+            SELECT s.id_store AS `id`, s.*, sl.*,gs.*
+            FROM ' . _DB_PREFIX_ . 'store s
+            ' . Shop::addSqlAssociation('store', 's') . '
+            LEFT JOIN ' . _DB_PREFIX_ . 'store_lang sl ON (
+            sl.id_store = s.id_store
+            AND sl.id_lang = ' . (int) $idLang . '
+            )
+            LEFT JOIN ' . _DB_PREFIX_ . 'group_store gs ON 
+            (gs.`id_group_store` = s.`id_group`) 
+            WHERE s.active = 1'
+        );
+
+        return $stores;
+    }
 }
