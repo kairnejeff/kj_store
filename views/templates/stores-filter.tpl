@@ -7,7 +7,7 @@
                 <p class="hour">{$store.today_hours}</p>
                 <address>{$store.address.formatted nofilter}</address>
                 {if $store.note}
-                <p class="text-justify">{$store.note}<p>
+                <p class="text-justify">{$store.note}</p>
                 {/if}
                 {if $store.phone}
                     <p><i class="material-icons">&#xE0B0;{$store.phone}</p>
