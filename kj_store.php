@@ -35,7 +35,7 @@ class kj_store extends Module
     }
 
     public function installSql(){
-        $sqlAddColume= ' ALTER TABLE `'._DB_PREFIX_.'group_store` ADD id_group int(11) NULL';
+        $sqlAddColume= ' ALTER TABLE `'._DB_PREFIX_.'store` ADD id_group int(11) NULL';
         $sqlAddtable='
             CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'group_store` (
                 `id_group_store` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -48,7 +48,7 @@ class kj_store extends Module
 
     protected function uninstallSql()
     {
-        $sqlDropColumn='ALTER TABLE `'._DB_PREFIX_.'group_store` DROP id_group';
+        $sqlDropColumn='ALTER TABLE `'._DB_PREFIX_.'store` DROP id_group';
         $sqlDropTable='DROP TABLE IF EXISTS `'._DB_PREFIX_.'group_store`';
         return Db::getInstance()->execute($sqlDropColumn)&& Db::getInstance()->execute($sqlDropTable);
     }
