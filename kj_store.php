@@ -57,7 +57,7 @@ class kj_store extends Module
         if (Tools::isSubmit('submitGroup') || Tools::isSubmit('delete_id_group')
         ) {
             if(Tools::isSubmit('submitGroup')){
-                $name= str_replace("'","\'",Tools::getValue('name'));
+                $name= Tools::getValue('name');
                 if($this->existGroup($name)){
                     $error=$this->getTranslator()->trans('Name exists already .', array(), 'Modules.kj_store.Admin');
                 }
@@ -150,7 +150,7 @@ class kj_store extends Module
 
     public function existGroup($name){
        $count= Db::getInstance()->executeS("
-        Select count(`id_group_store`) as `nbGroup` from `"._DB_PREFIX_."group_store` where `name` = '".strtolower($name)."'
+        Select count(`id_group_store`) as `nbGroup` from `"._DB_PREFIX_."group_store` where `name` = '".strtolower(str_replace("'","\'",$name))."'
         ");
        if($count[0]['nbGroup']>0){
            return true;
