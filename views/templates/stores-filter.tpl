@@ -3,7 +3,7 @@
         <div class="store-item-container clearfix">
             <div class="col-md-5 col-sm-7 col-xs-12 store-description">
                 <p class="h3 card-title">{$store.name}</p>
-                <p class="distance">{$store.distance}</p>
+                <p class="distance">{$store.distance} km</p>
                 <p class="hour">{$store.today_hours}</p>
                 <address>{$store.address.formatted nofilter}</address>
                 {if $store.note}
